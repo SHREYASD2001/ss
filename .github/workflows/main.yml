@@ -7,7 +7,7 @@ on:
 
 jobs:
   automation-tests:
-    runs-on: ubuntu-latest  # Using Linux runner
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
@@ -19,23 +19,26 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      # ✅ Start Virtual Display (For GUI Tests)
+      - name: Install xkb-data (Fix Xvfb Warnings)
+        run: sudo apt-get update && sudo apt-get install -y xkb-data
+
       - name: Start Xvfb (Virtual Display)
         run: Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp -noreset -extension GLX -extension RANDR -extension RENDER &
         shell: bash
 
       - name: Set Display Environment Variable
-        run: echo "DISPLAY=:99" >> $GITHUB_ENV  # Uses the virtual display
+        run: echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Build Project with Gradle
         run: ./gradlew build
 
-      - name: Run Automation Tests with TestNG
+      - name: Run Automation Tests
         run: ./gradlew testng --info
 
+      # ✅ Upload Test Reports for Download
       - name: Upload Test Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
+          name: Test-Reports
           path: build/reports/tests/test
