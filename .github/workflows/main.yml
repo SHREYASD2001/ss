@@ -21,7 +21,7 @@ jobs:
 
       # ✅ Start Virtual Display (For GUI Tests)
       - name: Start Xvfb (Virtual Display)
-        run: Xvfb :99 -screen 0 1920x1080x24 &
+        run: Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp -noreset -extension GLX -extension RANDR -extension RENDER &
         shell: bash
 
       - name: Set Display Environment Variable
