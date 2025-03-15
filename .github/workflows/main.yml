@@ -18,9 +18,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
-
-      - name: Kill Existing Chrome Sessions
-        run: pkill -f chrome || true
+#
+#      - name: Kill Existing Chrome Sessions
+#        run: pkill -f chrome || true
 
       - name: Grant Execute Permission to Gradle Wrapper
         run: chmod +x gradlew
