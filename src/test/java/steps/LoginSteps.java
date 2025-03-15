@@ -1,6 +1,7 @@
 package steps;
 
 import io.cucumber.java.en.Given;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -8,9 +9,10 @@ public class LoginSteps {
 
     @Given("user opens portal")
     public void user_opens_portal() {
+//        WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         System.out.println("Opening Portal");
-        driver.get("google.com");
+        driver.get("https://www.google.com/");
         System.out.println("Opening Portal");
         driver.manage().window().maximize();
         System.out.println("Maximizing Window");

@@ -7,7 +7,7 @@ on:
 
 jobs:
   automation-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest  # Using Linux runner
 
     steps:
       - name: Checkout Repository
@@ -19,26 +19,23 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Verify Chrome Installation
-        run: |
-          if ($env:RUNNER_OS -eq "Windows") { & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version }
-          else { google-chrome --version }
-        shell: pwsh
+      # ✅ Start Virtual Display (For GUI Tests)
+      - name: Start Xvfb (Virtual Display)
+        run: Xvfb :99 -screen 0 1920x1080x24 &
+        shell: bash
 
-      - name: Grant Execute Permission to Gradle (For Linux/macOS)
-        if: runner.os != 'Windows'
-        run: chmod +x gradlew
+      - name: Set Display Environment Variable
+        run: echo "DISPLAY=:99" >> $GITHUB_ENV  # Uses the virtual display
 
       - name: Build Project with Gradle
-        run: .\gradlew.bat build
+        run: ./gradlew build
 
       - name: Run Automation Tests with TestNG
-        run: .\gradlew.bat testng --info
+        run: ./gradlew testng --info
 
-      # Upload Test Reports as an Artifact
       - name: Upload Test Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Test-Reports
-          path: build/reports/tests/test  # Default location for HTML reports
+          name: test-reports
+          path: build/reports/tests/test
