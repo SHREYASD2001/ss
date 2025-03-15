@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'io.cucumber:cucumber-java:7.21.1'
+    implementation 'io.cucumber:cucumber-testng:7.21.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.29.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.9.3'
+}
+
+test {
+    useTestNG()
+}
+
+tasks.register('testng', Test) {
+    dependsOn testClasses
+    classpath = files(sourceSets.test.output, configurations.testRuntimeClasspath)
+    useTestNG {
+        suites file('src/test/resources/testng.xml')
+    }
+}
