@@ -1,12 +1,12 @@
 .gradle
-.idea
+.idea/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
-target
+target/
 *.iws
 *.iml
 *.ipr
