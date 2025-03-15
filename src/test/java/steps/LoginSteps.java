@@ -10,7 +10,7 @@ public class LoginSteps {
 
     @Given("user opens portal")
     public void user_opens_portal() {
-//        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().setup();
         System.out.println("Opening chrome browser");
         WebDriver driver = new ChromeDriver();
         System.out.println("Opening Portal");
