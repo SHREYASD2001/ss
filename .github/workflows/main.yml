@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Kill Existing Chrome Sessions
-      - run: pkill -f chrome || true
-
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -21,6 +18,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
+
+      - name: Kill Existing Chrome Sessions
+      - run: pkill -f chrome || true
 
       - name: Grant Execute Permission to Gradle Wrapper
         run: chmod +x gradlew
