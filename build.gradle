@@ -33,4 +33,9 @@ tasks.register('testng', Test) {
         events "passed", "skipped", "failed"
         showStandardStreams = true  // Ensures console logs are captured
     }
+
+    reports {
+        junitXml.required = true
+        html.required = true  // Generates HTML reports
+    }
 }
