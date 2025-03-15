@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Kill Existing Chrome Sessions
+      - run: pkill -f chrome || true
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -29,11 +32,7 @@ jobs:
         run: ./gradlew testng --info
 
       - name: Run UI Tests
-        run: |
-          export DISPLAY=:99
-          google-chrome --display=:99 --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 &
-          sleep 5  # Allow browser to start
-          ./gradlew clean testng
+        run: ./gradlew clean testng
 
       # ✅ Upload Test Reports for Download
       - name: Upload Test Reports

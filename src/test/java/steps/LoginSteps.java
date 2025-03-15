@@ -18,11 +18,11 @@ public class LoginSteps {
         ChromeOptions options = new ChromeOptions();
 
         // Generate a unique temporary user-data directory
-        Path userDataDir = Paths.get(System.getProperty("java.io.tmpdir"), "chrome-user-data-" + System.currentTimeMillis());
-        options.addArguments("--user-data-dir=" + userDataDir.toAbsolutePath().toString());
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
+//        Path userDataDir = Paths.get(System.getProperty("java.io.tmpdir"), "chrome-user-data-" + System.currentTimeMillis());
+//        options.addArguments("--user-data-dir=" + userDataDir.toAbsolutePath().toString());
+//        options.addArguments("--remote-allow-origins=*");
+//        options.addArguments("--no-sandbox");
+//        options.addArguments("--disable-dev-shm-usage");
         System.out.println("Opening chrome browser");
         WebDriver driver = new ChromeDriver(options);
         System.out.println("Opening Portal");
