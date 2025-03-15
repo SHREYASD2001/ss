@@ -12,7 +12,7 @@ public class LoginSteps {
     public void user_opens_portal() {
 //        WebDriverManager.chromedriver().setup();
         System.out.println("Opening chrome browser");
-        RemoteWebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver();
         System.out.println("Opening Portal");
         driver.get("https://www.google.com/");
         System.out.println("Maximizing Window");
