@@ -29,6 +29,9 @@ jobs:
       - name: Set Display Environment Variable
         run: echo "DISPLAY=:99" >> $GITHUB_ENV
 
+      - name: Grant Execute Permission to Gradle Wrapper
+        run: chmod +x gradlew
+
       - name: Build Project with Gradle
         run: ./gradlew build
 
