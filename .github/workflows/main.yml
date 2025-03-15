@@ -20,7 +20,10 @@ jobs:
           java-version: '11'
 
       - name: Verify Chrome Installation
-        run: google-chrome --version
+        run: |
+          if ($env:RUNNER_OS -eq "Windows") { & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version }
+          else { google-chrome --version }
+        shell: pwsh
 
       - name: Grant Execute Permission to Gradle (For Linux/macOS)
         if: runner.os != 'Windows'
