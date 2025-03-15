@@ -28,6 +28,13 @@ jobs:
       - name: Run Automation Tests
         run: ./gradlew testng --info
 
+      - name: Run UI Tests
+        run: |
+          export DISPLAY=:99
+          google-chrome --display=:99 --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 &
+          sleep 5  # Allow browser to start
+          ./gradlew clean testng
+
       # ✅ Upload Test Reports for Download
       - name: Upload Test Reports
         if: always()
